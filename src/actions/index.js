@@ -10,6 +10,14 @@ export function setNews(news) {
 };
 
 
+export function setSources(sources) {
+
+    return {
+        type: actionTypes.SOURCES_SET,
+        sources
+    };
+}
+
 
 export function fetchNews() {
 
@@ -20,4 +28,15 @@ export function fetchNews() {
                 dispatch(setNews(data.articles));
             });
     };
+}
+
+export function fetchSources(dispatch) {
+
+    return function () {
+        fetch('https://newsapi.org/v1/sources')
+            .then((res) => res.json())
+            .then((data) => {
+                dispatch(setSources(data.sources));
+            })
+    }
 }
